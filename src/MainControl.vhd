@@ -5,8 +5,8 @@ entity MainControl is
     port(
         opcode      : in std_logic_vector(5 downto 0);
         funct       : in std_logic_vector(5 downto 0);
-        branch      : out std_logic_vector(2 downto 0);
-        ALUOp       : out std_logic_vector(4 downto 0);
+        branch      : out std_logic_vector(1 downto 0);
+        ALUOp       : out std_logic_vector(3 downto 0);
         extOp       : out std_logic_vector(1 downto 0);
         jump        : out std_logic;
         load        : out std_logic;
