@@ -34,7 +34,7 @@ architecture Behavioral of CPU is
         regWrite    : out std_logic;
         memToReg    : out std_logic_vector(1 downto 0);
         ALUsrc      : out std_logic;
-        regDst      : out std_logic_vector(1 downto 0));        
+        regDst      : out std_logic_vector(1 downto 0));
     end component;
 
     component ALUControl
@@ -54,21 +54,31 @@ architecture Behavioral of CPU is
         zero        : out std_logic);
     end component;
      
-    signal rsel1    : std_logic_vector(3 downto 0);
-    signal rsel2    : std_logic_vector(3 downto 0);
-    signal wsel     : std_logic;
-    signal wdat     : std_logic_vector(31 downto 0);
-    signal rdat1    : std_logic_vector(31 downto 0);
-    signal rdat2    : std_logic_vector(31 downto 0);
+     component RAM32
+     port(
+        clk         : in std_logic;
+        reset       : in std_logic;
+        r_w         : in std_logic;
+        address     : in std_logic_vector(9 downto 0);
+        data_in     : in std_logic_vector(31 downto 0);
+        data_out    : out std_logic_vector(31 downto 0));
+     end component;
+     
+    signal rsel1        : std_logic_vector(3 downto 0);
+    signal rsel2        : std_logic_vector(3 downto 0);
+    signal wsel         : std_logic;
+    signal wdat         : std_logic_vector(31 downto 0);
+    signal rdat1        : std_logic_vector(31 downto 0);
+    signal rdat2        : std_logic_vector(31 downto 0);
 
 begin
 
     uut_register: RegisterFile PORT MAP (
         clk => clk,
-        reset => reset,
+        reset => reset, 
         rsel1 => rsel1,
         rsel2 => rsel2,
-        wsel => wsel,
+        wsel => wsel,     
         wdat => wdat,
         rdat1 => rdat1,
         rdat2 => rdat2);
