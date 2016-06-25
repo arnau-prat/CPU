@@ -12,11 +12,11 @@ entity RAM32 is
 end RAM32;
 
 architecture Behavioral of RAM32 is
-    type store_t is array (0 to 31) of std_logic_vector(15 downto 0);
-    signal ram_32: store_t := (others => X"0000");
+    type store_t is array (0 to 31) of std_logic_vector(31 downto 0);
+    signal ram_32: store_t := (others => X"00000000");
 begin
     process(clk)
-    begin
+     begin
         if rising_edge(clk) then
             if (r_w = '1') then
                 ram_32(to_integer(unsigned(address(5 downto 0)))) <= data_in;
